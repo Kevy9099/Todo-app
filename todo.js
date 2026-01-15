@@ -2,7 +2,7 @@ const TODO_LIST_URL = 'http://localhost:3000/todoList'
 
 $.get(TODO_LIST_URL).then(data => console.log(data))
 
-$('#todoForm').on('submit', function (e) {
+$('#addTodoForm').on('submit', function (e) {
     e.preventDefault();
 
     fetch(TODO_LIST_URL, {
@@ -34,10 +34,10 @@ function displayTodos() {
         data.forEach(todo => {
             $('#todoTableBody').append(`
                 <tr>
-                    <td>${todo.id}</td>
-                    <td>${todo.fullName}</td>
-                    <td>${todo.taskName}</td>
-                    <td>${todo.taskDescription}</td>
+                    <td data-label="Task ID">${todo.id}</td>
+                    <td data-label="Name">${todo.fullName}</td>
+                    <td data-label="Task Name">${todo.taskName}</td>
+                    <td data-label="Task Description">${todo.taskDescription}</td>
                 <tr>
             `);
         });

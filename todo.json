@@ -1,28 +1,16 @@
 {
   "todoList": [
     {
-      "fullName": "Kevin Mak",
-      "taskName": "homework",
-      "taskDescription": "projects",
-      "id": "42fc"
+      "id": "ea46",
+      "fullName": "Kevin",
+      "taskName": "Homework",
+      "taskDescription": "finish project week 12"
     },
     {
-      "id": "e5bb",
-      "fullName": "Rubi Mak",
-      "taskName": "Shopping Day",
-      "taskDescription": "Vacuum, Dishes, and Mop "
-    },
-    {
-      "id": "9fb0",
-      "fullName": "Sophia Mak",
-      "taskName": "Clean Room",
-      "taskDescription": "Pickup toys and make bed"
-    },
-    {
-      "id": "82c6",
-      "fullName": "Olive Mak",
-      "taskName": "Training",
-      "taskDescription": "One Hour of Training"
+      "id": "5dd0",
+      "fullName": "Rubi",
+      "taskName": "Clean",
+      "taskDescription": "mop"
     }
   ]
 }
