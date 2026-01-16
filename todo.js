@@ -12,9 +12,30 @@ $('#addTodoForm').on('submit', function (e) {
             fullName: $('#newName').val(),
             taskName: $('#newTaskName').val(),
             taskDescription: $('#newTaskDescription').val()
+
         })
-    });
+    }).then(async (res) => {
+        if (!res.ok) {
+            const msg = await res.text().catch(() => "");
+            throw new Error(`Created failed (${res.status}):${msg || res.statusText}`)
+        }
+        return res.json();
+    }).then((created) => {
+        alert(`Created task ID ${created.id}`);
+
+        $('#newName').val('');
+        $('#newTaskName').val('');
+        $('#newTaskDescription').val('');
+
+        displayTodos();
+    })
+        .catch((err) => {
+            console.error(err);
+            alert(err.message);
+        });
 });
+
+
 
 function displayTodos() {
     $('#todoTableBody').empty();
@@ -62,57 +83,51 @@ function deleteTodo() {
             throw new Error(`Delete Failed (${res.status}): ${msg || res.statusText}`);
         }
 
-        console.log(`Deleted Task ID ${taskId}.`);
+        alert(`Deleted task ID ${taskId}`); 
         document.getElementById("idNumber").value = "";
         displayTodos();
-    }).catch((err) => {
-        console.error(err);
-        alert(err.message);
     })
+        .catch((err) => {
+            console.error(err);
+            alert(err.message);
+        });
 }
-
 function updateTodo() {
-const taskId = document.getElementById("updateIdNumber").value;
+    const taskId = document.getElementById("updateIdNumber").value;
 
-  if (!taskId) {
-    alert("Please enter a task ID to update!");
-    return;
-  }
+    if (!taskId) {
+        alert("Please enter a task ID to update!");
+        return;
+    }
 
-  const fullNameVal = document.getElementById("updateName").value.trim();
-  const taskNameVal = document.getElementById("updateTaskName").value.trim();
-  const taskDescVal = document.getElementById("updateTaskDescription").value.trim();
+    const fullNameVal = document.getElementById("updateName").value.trim();
+    const taskNameVal = document.getElementById("updateTaskName").value.trim();
+    const taskDescVal = document.getElementById("updateTaskDescription").value.trim();
 
-  const updates = {};
-  if (fullNameVal) updates.fullName = fullNameVal;
-  if (taskNameVal) updates.taskName = taskNameVal;
-  if (taskDescVal) updates.taskDescription = taskDescVal;
+    const updates = {};
+    if (fullNameVal) updates.fullName = fullNameVal;
+    if (taskNameVal) updates.taskName = taskNameVal;
+    if (taskDescVal) updates.taskDescription = taskDescVal;
 
-  fetch(`${TODO_LIST_URL}/${taskId}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(updates)
-  })
-    .then(async (res) => {
-      if (!res.ok) {
-        const msg = await res.text().catch(() => "");
-        throw new Error(`Update failed (${res.status}): ${msg || res.statusText}`);
-      }
-      return res.json(); // json-server returns the updated object
+    fetch(`${TODO_LIST_URL}/${taskId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updates)
     })
-    .then((updated) => {
-      console.log("Updated:", updated);
+        .then(async (res) => {
+            if (!res.ok) {
+                const msg = await res.text().catch(() => "");
+                throw new Error(`Update failed (${res.status}): ${msg || res.statusText}`);
+            }
+            return res.json(); // json-server returns the updated object
+        })
+        .then((updated) => {
+            alert(`Updated task ID ${updated.id}`); 
 
-      // Clear inputs
-      document.getElementById("updateIdNumber").value = "";
-      document.getElementById("updateName").value = "";
-      document.getElementById("updateTaskName").value = "";
-      document.getElementById("updateTaskDescription").value = "";
-
-      displayTodos(); // refresh list
-    })
-    .catch((err) => {
-      console.error(err);
-      alert(err.message);
-    });
+            displayTodos();
+        })
+        .catch((err) => {
+            console.error(err);
+            alert(err.message);
+        });
 }
