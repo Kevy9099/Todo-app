@@ -10,6 +10,7 @@ $('#addApplicationForm').on('submit', function (e) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             applicantName: $('#addApplicantName').val(),
+            companyName: $('#addCompanyName').val(),
             position: $('#addPosition').val(),
             applicationStatus: $('#addApplicationStatus').val()
         })
@@ -23,6 +24,7 @@ $('#addApplicationForm').on('submit', function (e) {
         alert(`Created Application Id ${created.id}`);
 
         $('#addApplicantName').val('');
+        $('#addCompanyName').val('');
         $('#addPosition').val('');
         $('#addApplicationStatus').val('');
 
@@ -54,6 +56,7 @@ function displayApplications() {
                 <tr>
                     <td data-label="Application Id">${tracker.id}</td>
                     <td data-label="Applicant Name">${tracker.applicantName}</td>
+                    <td data-label="Company Name">${tracker.companyName}</td>
                     <td data-label="Position">${tracker.position}</td>
                     <td data-label="Application Status">${tracker.applicationStatus}</td>
                 </tr>
@@ -102,11 +105,13 @@ function updateApplications() {
     }
 
     const applicantNameVal = document.getElementById("updateApplicantName").value.trim();
+    const companyNameVal = document.getElementById("updateCompanyName").value.trim();
     const positionVal = document.getElementById("updatePosition").value.trim();
     const applicationStatusVal= document.getElementById("updateApplicationStatus").value.trim();
 
     const updates = {};
     if (applicantNameVal) updates.applicantName = applicantNameVal;
+    if (comapnyNameVal) updates.comapnyName = companyNameVal;
     if (positionVal) updates.position = positionVal;
     if (applicationStatusVal) updates.applicationStatus = applicationStatusVal
 
