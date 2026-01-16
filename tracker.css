@@ -1,22 +1,22 @@
 @media (max-width: 475px) {
 
-  .todo-table thead {
+  .tracker-table thead {
     display: none;
   }
 
-  .todo-table td{
+  .tracker-table td{
      border: 1px solid black;
   }
 
-  .todo-table,
-  .todo-table tbody,
-  .todo-table tr,
-  .todo-table td {
+  .tracker-table,
+  .trackertable tbody,
+  .tracker-table tr,
+  .tracker-table td {
     display: block;
     width: 100%;
   }
 
-  .todo-table tr {
+  .tracker-table tr {
     margin-bottom: 0.25rem;
     border: 1px solid #dee2e6;
     border-radius: 0.2rem;
@@ -24,13 +24,13 @@
     background-color: #fff;
   }
 
-  .todo-table td {
+  .tracker-table td {
     text-align: right;
     padding-left: 50%;
     position: relative;
   }
 
-  .todo-table td::before {
+  .tracker-table td::before {
     content: attr(data-label);
     position: absolute;
     left: 0;
