@@ -13,13 +13,20 @@
   </li>
   <li>
     open package.json and update: 
+    <br>
+    <br>
       (a) "name": "db.json",
+      <br>
       (b) "version": "1.0.0",
+      <br>
       (c) "description": "text",
+      <br>
       (d) "main": "index.js",
+      <br>
       (e) "scripts": {
             "start": "json-server --watch db.json --port 3000"
           },
+      <br>
       (f) "dependencies":{
             "json-server": "^0.17.4"
           }
